@@ -45,10 +45,19 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+   <div className="min-h-screen bg-cover bg-center bg-[url('/assets/auth.jpeg')] flex items-center justify-center relative">
+      <div className="absolute inset-0 bg-black/1 backdrop-blur-[4px] z-0" />
+      <div className="relative z-10 w-full max-w-md p-6">
       <Card className="w-full max-w-md shadow-lg">
         <CardContent className="p-6 space-y-4">
+          <div className="flex flex-col items-center select-none">
+              <img
+                src="/assets/title.png"
+                alt="Fame"
+                className="w-24"
+              />
           <h2 className="text-2xl font-bold text-center">Login</h2>
+            </div>
 
           <div className="space-y-2">
             <Label htmlFor="email">Email</Label>
@@ -73,5 +82,7 @@ export default function LoginPage() {
         </CardContent>
       </Card>
     </div>
+    </div>
+    
   );
 }

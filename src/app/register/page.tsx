@@ -57,17 +57,17 @@ export default function RegisterPage() {
 
   return (
     <div className="min-h-screen bg-cover bg-center bg-[url('/assets/auth.jpeg')] flex items-center justify-center relative">
-      <div className="absolute inset-0 bg-black/1 backdrop-blur-sm z-0" />
+      <div className="absolute inset-0 bg-black/1 backdrop-blur-[4px] z-0" />
       <div className="relative z-10 w-full max-w-md p-6">
-        <Card className="bg-white/80 shadow-xl backdrop-blur border border-white rounded-xl">
+        <Card className="bg-white/90 shadow-xl backdrop-blur border border-white rounded-xl">
           <CardContent className="p-2 space-y-2 text-black">
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center select-none">
               <img
-                src="/assets/fame.jpg"
-                alt="Logo"
+                src="/assets/title.png"
+                alt="Fame"
                 className="w-24"
               />
-              <h2 className="text-2xl font-bold text-center mt-2">Create Account</h2>
+              <h2 className="text-2xl font-bold text-center mt-0">Create Account</h2>
             </div>
 
             <div className="space-y-2">
@@ -78,6 +78,7 @@ export default function RegisterPage() {
                 onChange={handleChange}
                 placeholder="Name"
                 required
+                className='b border-black border-[0.2px]'
               />
             </div>
 
@@ -90,11 +91,18 @@ export default function RegisterPage() {
                 onChange={handleChange}
                 placeholder="Email"
                 required
+                className='b border-black'
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+              <div className=' flex items-center w-full justify-between'>
+
+              <Label >Password</Label>
+              <div className="text-xs text-blue-500 ">
+                Forgot Password?
+              </div>
+              </div>
               <Input
                 type="password"
                 name="password"
@@ -102,10 +110,8 @@ export default function RegisterPage() {
                 onChange={handleChange}
                 placeholder="Password"
                 required
+                className='b border-black'
               />
-              <span className="text-xs text-blue-500 text-right block cursor-pointer hover:underline">
-                Forgot Password?
-              </span>
             </div>
 
             <Button onClick={handleSubmit} disabled={loading} className="w-full">
