@@ -16,10 +16,10 @@ export default function AppPage() {
         setUser(parsed);
       } catch {
         setUser(null);
-        router.replace('/app/login');
+        router.replace('/login');
       }
     } else {
-      router.replace('/app/login');
+      router.replace('/login');
     }
   }, [router]);
 
