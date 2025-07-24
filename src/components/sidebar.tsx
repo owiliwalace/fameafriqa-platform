@@ -7,52 +7,63 @@ import {
   Settings,
   ChevronDown,
   ChevronUp,
+  User,
 } from 'lucide-react';
 import Link from 'next/link';
-import { useState } from 'react';
- import { ScrollArea } from '@/components/ui/scroll-area';
- 
+import { useState, useEffect } from 'react';
+import { ScrollArea } from '@/components/ui/scroll-area';
+
 const menuItems = [
   {
     label: 'Dashboard',
     icon: Home,
-    href: '/app',
+    href: '/',
   },
   {
     label: 'Music',
     icon: Music,
     children: [
-      { label: 'Upload Music', href: '/app/upload/music' },
-      { label: 'Manage Music', href: '/app/music/manage' },
+      { label: 'Upload Music', href: '/upload/music' },
+      { label: 'Manage Music', href: '/music/manage' },
     ],
   },
   {
     label: 'Media',
     icon: UploadCloud,
     children: [
-      { label: 'Upload Videos', href: '/app/upload/video' },
-      { label: 'Upload Images', href: '/app/upload/image' },
+      { label: 'Upload Videos', href: '/' },
+      { label: 'Upload Images', href: '/' },
     ],
   },
   {
     label: 'Settings',
     icon: Settings,
-    href: '/app/settings',
+    href: '/',
   },
 ];
 
 export function Sidebar() {
   const [open, setOpen] = useState<string | null>(null);
+  const [user, setUser] = useState<{ name: string; avatar_url?: string } | null>(null);
 
   const toggle = (label: string) => {
     setOpen(open === label ? null : label);
   };
 
+  useEffect(() => {
+    const storedUser = localStorage.getItem('fame_user');
+    if (storedUser) {
+      try {
+        setUser(JSON.parse(storedUser));
+      } catch {
+        setUser(null);
+      }
+    }
+  }, []);
+
   return (
     <aside className="hidden md:flex flex-col w-64 border-r bg-muted min-h-screen">
-      <div className="p-6 font-bold text-2xl tracking-tight">
-        FameAfriqa
-      </div>
+      <div className="p-6 font-bold text-2xl tracking-tight">FameAfriqa</div>
 
       <ScrollArea className="flex-1">
         <nav className="flex flex-col gap-2 px-4 pb-4">
@@ -103,8 +114,20 @@ export function Sidebar() {
         </nav>
       </ScrollArea>
 
-      <div className="p-4 border-t text-xs text-muted-foreground">
-        &copy; 2025 FameAfriqa. All rights reserved.
+      {/* USER AVATAR */}
+      <div className="flex items-center gap-3 p-4 border-t">
+        {user?.avatar_url ? (
+          <img
+            src={user.avatar_url}
+            alt={user.name}
+            className="w-8 h-8 rounded-full object-cover"
+          />
+        ) : (
+          <div className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center text-sm text-gray-600">
+            <User className="h-4 w-4" />
+          </div>
+        )}
+        <div className="text-sm text-muted-foreground truncate">{user?.name}</div>
       </div>
     </aside>
   );

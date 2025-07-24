@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Input } from '@/components/ui/input';
@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
+import Link from 'next/link';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -44,24 +45,31 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
-      <Card className="w-full max-w-md">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+      <Card className="w-full max-w-md shadow-lg">
         <CardContent className="p-6 space-y-4">
-          <h2 className="text-2xl font-semibold text-center">Login</h2>
+          <h2 className="text-2xl font-bold text-center">Login</h2>
 
           <div className="space-y-2">
-            <Label>Email</Label>
-            <Input name="email" type="email" value={form.email} onChange={handleChange} />
+            <Label htmlFor="email">Email</Label>
+            <Input id="email" name="email" type="email" value={form.email} onChange={handleChange} />
           </div>
 
           <div className="space-y-2">
-            <Label>Password</Label>
-            <Input name="password" type="password" value={form.password} onChange={handleChange} />
+            <Label htmlFor="password">Password</Label>
+            <Input id="password" name="password" type="password" value={form.password} onChange={handleChange} />
           </div>
 
           <Button onClick={handleLogin} disabled={loading} className="w-full">
             {loading ? 'Logging in...' : 'Login'}
           </Button>
+
+          <p className="text-sm text-center text-muted-foreground">
+            Don’t have an account?{' '}
+            <Link href="/register" className="text-primary hover:underline">
+              Register
+            </Link>
+          </p>
         </CardContent>
       </Card>
     </div>

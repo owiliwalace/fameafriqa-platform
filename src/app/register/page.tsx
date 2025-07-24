@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -11,12 +11,19 @@ import { toast } from 'sonner';
 export default function RegisterPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [fadeIn, setFadeIn] = useState(false);
+
   const [form, setForm] = useState({
     name: '',
     email: '',
     password: '',
     avatar_url: '',
   });
+
+  useEffect(() => {
+    const timeout = setTimeout(() => setFadeIn(true), 100);
+    return () => clearTimeout(timeout);
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -25,7 +32,6 @@ export default function RegisterPage() {
 
   const handleSubmit = async () => {
     setLoading(true);
-
     try {
       const res = await fetch('https://fameafriqa.com/users/register.php', {
         method: 'POST',
@@ -40,35 +46,39 @@ export default function RegisterPage() {
       }
 
       localStorage.setItem('fame_user', JSON.stringify(data.user));
-
       toast.success('Account created successfully!');
       router.push('/');
     } catch (err) {
-  if (err instanceof Error) {
-    toast.error(err.message);
-  } else {
-    toast.error('An unknown error occurred');
-  }
-}
-
+      toast.error(err instanceof Error ? err.message : 'An unknown error occurred');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div className="relative min-h-screen bg-black text-white flex items-center justify-center">
-      
-
-      {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/60" />
-
-      {/* Card */}
-      <div className="relative z-10 w-full max-w-md p-4">
-        <Card className="bg-white/90 shadow-xl backdrop-blur border border-white rounded-xl">
-          <CardContent className="p-6 space-y-4 text-black">
-            <h2 className="text-2xl font-bold text-center">Create Account</h2>
+    <div className="min-h-screen bg-cover bg-center bg-[url('/assets/auth.jpeg')] flex items-center justify-center relative">
+      <div className="absolute inset-0 bg-black/1 backdrop-blur-sm z-0" />
+      <div className="relative z-10 w-full max-w-md p-6">
+        <Card className="bg-white/80 shadow-xl backdrop-blur border border-white rounded-xl">
+          <CardContent className="p-2 space-y-2 text-black">
+            <div className="flex flex-col items-center">
+              <img
+                src="/assets/fame.jpg"
+                alt="Logo"
+                className="w-24"
+              />
+              <h2 className="text-2xl font-bold text-center mt-2">Create Account</h2>
+            </div>
 
             <div className="space-y-2">
               <Label htmlFor="name">Name</Label>
-              <Input name="name" value={form.name} onChange={handleChange} required />
+              <Input
+                name="name"
+                value={form.name}
+                onChange={handleChange}
+                placeholder="Name"
+                required
+              />
             </div>
 
             <div className="space-y-2">
@@ -78,6 +88,7 @@ export default function RegisterPage() {
                 name="email"
                 value={form.email}
                 onChange={handleChange}
+                placeholder="Email"
                 required
               />
             </div>
@@ -89,20 +100,33 @@ export default function RegisterPage() {
                 name="password"
                 value={form.password}
                 onChange={handleChange}
+                placeholder="Password"
                 required
               />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="avatar_url">Avatar URL (optional)</Label>
-              <Input name="avatar_url" value={form.avatar_url} onChange={handleChange} />
+              <span className="text-xs text-blue-500 text-right block cursor-pointer hover:underline">
+                Forgot Password?
+              </span>
             </div>
 
             <Button onClick={handleSubmit} disabled={loading} className="w-full">
               {loading ? 'Registering...' : 'Register'}
             </Button>
 
-            <p className="text-sm text-center text-muted-foreground">
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <div className="flex-1 h-px bg-gray-400" />
+              <span>or</span>
+              <div className="flex-1 h-px bg-gray-400" />
+            </div>
+
+            <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
+              Sign in with Facebook
+            </Button>
+
+            <Button className="w-full bg-gray-200 hover:bg-gray-300 text-black">
+              Sign in with Google
+            </Button>
+
+            <p className="text-sm text-center text-muted-foreground mt-4">
               Already have an account?{' '}
               <span
                 onClick={() => router.push('/login')}
