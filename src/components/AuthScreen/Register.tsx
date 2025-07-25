@@ -1,5 +1,3 @@
-'use client';
-
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Input } from '@/components/ui/input';
@@ -7,9 +5,8 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
-import FloatingCard from '@/components/FloatingCard';
-
-export default function RegisterPage() {
+ 
+export default function Register() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [fadeIn, setFadeIn] = useState(false);
@@ -57,11 +54,11 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen bg-cover bg-center bg-[url('/assets/auth.jpeg')] flex items-center justify-center relative">
+    <div className="">
       
-      <div className="absolute inset-0 bg-black/1 backdrop-blur-[4px] z-0 flex flex-col" />
+      <div className="" />
       
-      <div className="relative z-10 w-full max-w-md p-6 pt-20"> {/* Add pt-20 to offset navbar */}
+      <div className=""> {/* Add pt-20 to offset navbar */}
         <Card className="bg-white/90 shadow-xl backdrop-blur border border-white rounded-xl">
           <CardContent className="p-2 space-y-2 text-black">
             <div className="flex flex-col items-center select-none">
@@ -70,7 +67,7 @@ export default function RegisterPage() {
                 alt="Fame"
                 className="w-24"
               />
-              <h2 className="text-2xl font-bold text-center mt-0">Create Account</h2>
+              <h2 className="text-2xl font-bold text-center">Create Account</h2>
             </div>
 
             <div className="space-y-2">
@@ -145,7 +142,6 @@ export default function RegisterPage() {
         </Card>
       </div>
     
-       <FloatingCard />
     </div>
   );
 }
