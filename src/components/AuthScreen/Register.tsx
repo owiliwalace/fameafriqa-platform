@@ -59,7 +59,7 @@ export default function Register() {
       <div className="" />
       
       <div className=""> {/* Add pt-20 to offset navbar */}
-        <Card className="bg-white/90 shadow-xl backdrop-blur border border-white rounded-xl">
+        <Card className=" shadow-xl backdrop-blur border border-white rounded-xl">
           <CardContent className="p-2 space-y-2 text-black">
             <div className="flex flex-col items-center select-none">
               <img
@@ -67,7 +67,7 @@ export default function Register() {
                 alt="Fame"
                 className="w-24"
               />
-              <h2 className="text-2xl font-bold text-center">Create Account</h2>
+             
             </div>
 
             <div className="space-y-2">
@@ -78,7 +78,7 @@ export default function Register() {
                 onChange={handleChange}
                 placeholder="Name"
                 required
-                className='border-black border-[0.2px]'
+                 
               />
             </div>
 
@@ -91,7 +91,7 @@ export default function Register() {
                 onChange={handleChange}
                 placeholder="Email"
                 required
-                className='border-black'
+              
               />
             </div>
 
@@ -107,7 +107,7 @@ export default function Register() {
                 onChange={handleChange}
                 placeholder="Password"
                 required
-                className='border-black'
+              
               />
             </div>
 
