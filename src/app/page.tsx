@@ -22,10 +22,10 @@ export default function AppPage() {
         setUser(parsed);
       } catch {
         setUser(null);
-        router.replace('/login');
+        router.replace('/Authentication');
       }
     } else {
-      router.replace('/login');
+      router.replace('/Authentication');
     }
   }, [router]);
 

@@ -129,15 +129,7 @@ export default function Register() {
               Sign in with Google
             </Button>
 
-            <p className="text-sm text-center text-muted-foreground mt-4">
-              Already have an account?{' '}
-              <span
-                onClick={() => router.push('/login')}
-                className="text-blue-600 hover:underline cursor-pointer"
-              >
-                Login
-              </span>
-            </p>
+            
           </CardContent>
         </Card>
       </div>

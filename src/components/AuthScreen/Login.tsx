@@ -93,12 +93,7 @@ export default function Login() {
             </Button>
 
 
-          <p className="text-sm text-center text-muted-foreground">
-            Don’t have an account?{' '}
-            <Link href="/register" className="text-primary hover:underline">
-              Register
-            </Link>
-          </p>
+         
         </CardContent>
       </Card>
     </div>
